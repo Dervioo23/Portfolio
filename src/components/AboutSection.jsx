@@ -3,7 +3,8 @@ import SectionHeading from './ui/SectionHeading'
 import CountUp from './ui/CountUp'
 import { ArrowUpRight } from './ui/Icons'
 import { useLang } from '../i18n/LanguageContext'
-import profilePhoto from '../../Images/Foto Profil Dervio.jpeg'
+
+const profilePhoto = '/images/foto-profil-dervio.jpeg'
 
 export default function AboutSection() {
   const { t } = useLang()
