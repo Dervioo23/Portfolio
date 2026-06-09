@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* offset for fixed navbar when jumping to anchors */
+    scroll-padding-top: 84px;
+  }
+
+  body {
+    @apply bg-navy-950 text-slate-200 font-sans antialiased;
+    background-image:
+      radial-gradient(70% 50% at 50% -10%, rgba(34, 211, 238, 0.10), transparent 60%),
+      radial-gradient(50% 40% at 100% 10%, rgba(59, 130, 246, 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  /* Subtle custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060912;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1a2438;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #243049;
+  }
+
+  ::selection {
+    background: rgba(34, 211, 238, 0.25);
+    color: #e2f6fb;
+  }
+}
+
+@layer components {
+  /* Glassmorphism panel */
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+  .glass-strong {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-2xl;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-cyanic-400 to-cyanic-600 bg-clip-text text-transparent;
+  }
+  .text-gradient-soft {
+    @apply bg-gradient-to-r from-slate-100 to-slatey-400 bg-clip-text text-transparent;
+  }
+
+  /* Section heading label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-cyanic-400/90;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-cyanic-500 px-6 py-3 text-sm font-semibold text-navy-950 transition-all duration-300 hover:bg-cyanic-400 hover:shadow-glow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanic-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950;
+  }
+
+  /* Secondary / ghost button */
+  .btn-ghost {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-slate-100 backdrop-blur-md transition-all duration-300 hover:border-cyanic-400/40 hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanic-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950;
+  }
+
+  /* Pill / chip */
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-sm text-slate-300 backdrop-blur-md transition-colors;
+  }
+
+  .projects-rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+  }
+  .projects-rail::-webkit-scrollbar {
+    display: none;
+  }
+  .projects-rail[data-dragging='true'] {
+    user-select: none;
+  }
+  .projects-rail[data-dragging='true'] * {
+    pointer-events: none;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+}
+
+@layer utilities {
+  .container-prose {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  /* faint blueprint grid overlay */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Alternating section band — a subtle indigo top-glow + faint lift so the
+     long single-scroll page gets a gentle rhythm without breaking cohesion. */
+  .section-alt {
+    background:
+      radial-gradient(72% 55% at 50% 0%, rgba(99, 102, 241, 0.05), transparent 70%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 24%);
+  }
+
+  /* Fine film grain for premium depth (very low opacity, decorative). */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+/* Respect reduced motion globally for big decorative loops */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
