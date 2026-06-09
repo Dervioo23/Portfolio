@@ -1,6 +1,7 @@
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 import CountUp from './ui/CountUp'
+import LanyardCard from './ui/LanyardCard'
 import { ArrowUpRight } from './ui/Icons'
 import { useLang } from '../i18n/LanguageContext'
 
@@ -65,18 +66,12 @@ export default function AboutSection() {
             </div>
           </div>
 
-          <Reveal delay={0.12}>
-            <figure className="mx-auto w-full max-w-[360px] lg:sticky lg:top-28 xl:max-w-[420px]">
-              <div className="glass-strong overflow-hidden rounded-2xl p-2 shadow-glow">
-                <img
-                  src={profilePhoto}
-                  alt={`${t.profile.name} profile portrait`}
-                  className="aspect-[4/5] w-full rounded-xl object-cover object-[50%_34%]"
-                  loading="lazy"
-                />
-              </div>
-            </figure>
-          </Reveal>
+          <LanyardCard
+            photo={profilePhoto}
+            name={t.profile.name}
+            role={t.ui.role}
+            className="lg:sticky lg:top-24"
+          />
         </div>
       </div>
     </section>
