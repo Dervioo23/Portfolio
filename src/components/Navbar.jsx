@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, Close, ArrowUpRight } from './ui/Icons'
 import { useLang } from '../i18n/LanguageContext'
@@ -34,12 +34,23 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [activeId, setActiveId] = useState('home')
   const { t, lang, setLang } = useLang()
+  const toggleRef = useRef(null)
+  const mobileMenuRef = useRef(null)
 
-  // lock body scroll when mobile menu open
+  // While the mobile menu is open: lock body scroll, close on Escape, move
+  // focus into the menu, and restore focus to the toggle when it closes.
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+    document.body.style.overflow = 'hidden'
+    const onKey = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    mobileMenuRef.current?.querySelector('a')?.focus()
     return () => {
       document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+      toggleRef.current?.focus()
     }
   }, [open])
 
@@ -127,6 +138,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:hidden">
           <LangSwitch lang={lang} setLang={setLang} />
           <button
+            ref={toggleRef}
             onClick={() => setOpen((v) => !v)}
             className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -141,6 +153,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={mobileMenuRef}
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}

@@ -20,6 +20,17 @@ export default function LanyardCard({ photo, name, role, className = '' }) {
   const pathRef = useRef(null)
   const [dims, setDims] = useState({ w: 0, h: 0, cardW: 208, cardH: 286 })
   const [ready, setReady] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+
+  // React to the user toggling their motion preference at runtime.
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const onChange = (event) => setReducedMotion(event.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   // Measure the container; derive card size from its width.
   useEffect(() => {
@@ -46,7 +57,7 @@ export default function LanyardCard({ photo, name, role, className = '' }) {
     const { w: W, h: H, cardW, cardH } = dims
     if (!container || !card || !path || !W || !H) return
 
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduce = reducedMotion
 
     const AX = W / 2
     const AY = 14
@@ -207,7 +218,7 @@ export default function LanyardCard({ photo, name, role, className = '' }) {
       window.removeEventListener('pointerup', onUp)
       window.removeEventListener('pointercancel', onUp)
     }
-  }, [dims])
+  }, [dims, reducedMotion])
 
   return (
     <div

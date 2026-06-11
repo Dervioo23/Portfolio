@@ -18,6 +18,14 @@ export default function App() {
 
   return (
     <div className="relative isolate min-h-screen overflow-x-hidden">
+      {/* Keyboard users can jump straight past the nav to the content */}
+      <a
+        href="#main-content"
+        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[60] focus-visible:rounded-full focus-visible:bg-cyanic-500 focus-visible:px-5 focus-visible:py-2.5 focus-visible:text-sm focus-visible:font-semibold focus-visible:text-navy-950 focus-visible:shadow-glow-lg"
+      >
+        Skip to content
+      </a>
+
       <Navbar />
 
       {/* Fine film grain over the whole page for premium depth */}
@@ -29,7 +37,7 @@ export default function App() {
       {/* Fixed, scroll-driven hero visual sitting behind all page content */}
       <HeroBackdrop heroRef={heroRef} />
 
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10">
         <HeroSection heroRef={heroRef} />
         {/* Sections after the hero get a solid background so they cleanly
             cover the (faded) backdrop as you scroll past it. */}

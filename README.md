@@ -55,7 +55,7 @@ npm run preview  # preview the production build
 - **Contact / social links**: update `email`, `linkedin`, `github`, `whatsapp` in the shared `links` object at the top of `translations.js`. GitHub and WhatsApp are placeholders (`#`) — replace when ready.
 - **Project links**: each project has `links.caseStudy`, `links.demo`, `links.source` (placeholders `#`).
 - **Colors**: tweak the palette in [`tailwind.config.js`](tailwind.config.js) (`navy`, `cyanic`).
-- **Fonts**: Inter / Space Grotesk / Sora, loaded in `index.html`.
+- **Fonts**: Inter (body) / Space Grotesk (display) / JetBrains Mono (technical labels), loaded in `index.html`.
 
 ## The Hero Image Sequence
 

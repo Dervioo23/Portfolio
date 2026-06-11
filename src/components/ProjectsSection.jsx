@@ -136,7 +136,7 @@ function ProjectModal({ project, index, total, labels, onClose, onPrev, onNext }
             <button type="button" aria-label={labels.prev} onClick={onPrev} className={navBtn}>
               <ArrowRight className="h-4 w-4 rotate-180" />
             </button>
-            <span className="min-w-[2.75rem] text-center font-display text-xs font-semibold text-slatey-400">
+            <span className="min-w-[2.75rem] text-center font-mono text-xs font-semibold text-slatey-400">
               {String(index + 1).padStart(2, '0')}/{String(total).padStart(2, '0')}
             </span>
             <button type="button" aria-label={labels.next} onClick={onNext} className={navBtn}>
@@ -241,7 +241,9 @@ function ProjectCard({ project, index, labels, onSelect, shouldIgnoreClick }) {
             {project.name}
           </h3>
         </div>
-        <span className="font-display text-sm font-semibold text-white/15">
+        <span
+          className={`font-mono text-sm font-semibold opacity-40 transition-opacity duration-300 group-hover:opacity-100 ${dotColor}`}
+        >
           {String(index + 1).padStart(2, '0')}
         </span>
       </div>

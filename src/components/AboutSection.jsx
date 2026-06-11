@@ -54,7 +54,7 @@ export default function AboutSection() {
               {about.highlights.map((h, i) => (
                 <Reveal key={h.label} delay={0.1 + i * 0.07}>
                   <div className="glass group flex min-h-[104px] flex-col justify-between rounded-xl p-4 transition-all duration-300 hover:border-cyanic-400/30 hover:bg-white/[0.06]">
-                    <div className="text-[10px] font-medium uppercase tracking-wider text-cyanic-400/80">
+                    <div className="font-mono text-[10px] font-medium uppercase tracking-wider text-cyanic-400/80">
                       {h.label}
                     </div>
                     <div className="mt-3 font-display text-sm font-semibold leading-snug text-white sm:text-base">

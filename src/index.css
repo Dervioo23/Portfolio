@@ -59,9 +59,9 @@
     @apply bg-gradient-to-r from-slate-100 to-slatey-400 bg-clip-text text-transparent;
   }
 
-  /* Section heading label */
+  /* Section heading label — mono for a precise, technical "credential" feel */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-cyanic-400/90;
+    @apply inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.2em] text-cyanic-400/90;
   }
 
   /* Primary button */
